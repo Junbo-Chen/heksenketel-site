@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snackbar De Heksenketel - Breda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            /* max-width: 1200px; */
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ff8c00;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff8c00;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 50%, #3d2b5e 100%);
+            color: white;
+            padding: 120px 2rem 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-logo {
+            max-width: 300px;
+            margin: 0 auto 2rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .hero-logo img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(255, 140, 0, 0.3));
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            color: #ff8c00;
+        }
+
+        .cta-button {
+            background: #ff8c00;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 140, 0, 0.4);
+        }
+
+        section {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2d1b4e;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-top: 4px solid #ff8c00;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-card h3 {
+            color: #2d1b4e;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .menu-category {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: #2d1b4e;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #ff8c00;
+            display: inline-block;
+            width: auto;
+        }
+
+        .friet-table {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .friet-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .friet-table th {
+            background: #2d1b4e;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .friet-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .friet-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .family-bags {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .family-bags h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .family-bags p {
+            font-size: 1.1rem;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .info-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .info-card h3 {
+            color: #2d1b4e;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .opening-hours {
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .day-hours {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .day-hours.closed {
+            color: #999;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background: #1a0f2e;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 968px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-logo {
+                max-width: 200px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">DE HEKSENKETEL</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-logo">
+            <img src="https://raw.githubusercontent.com/user/repo/main/logo.png" alt="Snackbar De Heksenketel Logo" onerror="this.style.display='none'">
+        </div>
+        <h1>Snackbar De Heksenketel</h1>
+        <p>Vers uit de ketel, heerlijk op je bord!</p>
+        <a href="#menu" class="cta-button">Bekijk ons Menu</a>
+    </section>
+
+    <section id="menu">
+        <h2>Ons Menu</h2>
+        
+        <!-- Friet Section -->
+        <div class="menu-category">
+            <h3 class="category-title">🍟 Friet</h3>
+            <div class="friet-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Klein</th>
+                            <th>Middel</th>
+                            <th>Groot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Zonder</td>
+                            <td>€3.00</td>
+                            <td>€3.50</td>
+                            <td>€4.00</td>
+                        </tr>
+                        <tr>
+                            <td>Mayo/Ketchup/Curry</td>
+                            <td>€3.50</td>
+                            <td>€4.00</td>
+                            <td>€4.50</td>
+                        </tr>
+                        <tr>
+                            <td>Speciaal/Piccalilly</td>
+                            <td>€3.70</td>
+                            <td>€4.20</td>
+                            <td>€4.80</td>
+                        </tr>
+                        <tr>
+                            <td>Oorlog (ui)</td>
+                            <td>€4.50</td>
+                            <td>€5.00</td>
+                            <td>€5.80</td>
+                        </tr>
+                        <tr>
+                            <td>Joppiesaus/Tartaar</td>
+                            <td>€3.70</td>
+                            <td>€4.20</td>
+                            <td>€4.80</td>
+                        </tr>
+                        <tr>
+                            <td>Satésaus</td>
+                            <td>€3.80</td>
+                            <td>€4.30</td>
+                            <td>€5.10</td>
+                        </tr>
+                        <tr>
+                            <td>Stoofvlees</td>
+                            <td>€4.80</td>
+                            <td>€5.50</td>
+                            <td>€6.50</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="family-bags">
+                <h4>Gezinszakken Friet:</h4>
+                <p>2 pers €5.40 | 2½ pers €6.80 | 3 pers €8.10 | 4 pers €10.80 | 5 pers €13.50</p>
+            </div>
+        </div>
+
+        <!-- Snacks Grid -->
+        <div class="menu-category">
+            <h3 class="category-title">🌭 Snacks</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-item"><span>Frikandel</span><span>€2.50</span></div>
+                    <div class="menu-item"><span>Frikandel speciaal</span><span>€3.20</span></div>
+                    <div class="menu-item"><span>Kroket</span><span>€2.50</span></div>
+                    <div class="menu-item"><span>Kwekkeboom kroket</span><span>€2.60</span></div>
+                    <div class="menu-item"><span>Goulashkroket</span><span>€2.60</span></div>
+                    <div class="menu-item"><span>Kalfskroket</span><span>€2.60</span></div>
+                    <div class="menu-item"><span>Kaaskroket</span><span>€2.70</span></div>
+                    <div class="menu-item"><span>Satékroket</span><span>€2.60</span></div>
+                    <div class="menu-item"><span>Garnalenkroket</span><span>€2.50</span></div>
+                    <div class="menu-item"><span>Bami/Nasischijf</span><span>€2.70</span></div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item"><span>Viandel</span><span>€2.70</span></div>
+                    <div class="menu-item"><span>Kipcorn</span><span>€2.70</span></div>
+                    <div class="menu-item"><span>(Ham-)kaassoufflé</span><span>€2.60</span></div>
+                    <div class="menu-item"><span>Berenklauw</span><span>€3.50</span></div>
+                    <div class="menu-item"><span>Mexicano</span><span>€3.10</span></div>
+                    <div class="menu-item"><span>Gehaktstaaf / pikanto</span><span>€2.70</span></div>
+                    <div class="menu-item"><span>Gehaktbal uit de frituur</span><span>€2.80</span></div>
+                    <div class="menu-item"><span>Gehaktbal uit jus</span><span>€3.50</span></div>
+                    <div class="menu-item"><span>Knakworst</span><span>€1.60</span></div>
+                    <div class="menu-item"><span>Braadworst</span><span>€2.80</span></div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item"><span>Hamburger los</span><span>€2.80</span></div>
+                    <div class="menu-item"><span>Sitostick</span><span>€3.30</span></div>
+                    <div class="menu-item"><span>Zigeunerstick</span><span>€2.80</span></div>
+                    <div class="menu-item"><span>Crizlystick</span><span>€3.30</span></div>
+                    <div class="menu-item"><span>Schaslick</span><span>€3.40</span></div>
+                    <div class="menu-item"><span>Shoarmarol</span><span>€3.30</span></div>
+                    <div class="menu-item"><span>Satérol</span><span>€2.80</span></div>
+                    <div class="menu-item"><span>Smulrol</span><span>€3.20</span></div>
+                    <div class="menu-item"><span>Frikandel XXL</span><span>€4.70</span></div>
+                    <div class="menu-item"><span>Frikandel XXL speciaal</span><span>€5.80</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kip Snacks -->
+        <div class="menu-category">
+            <h3 class="category-title">🍗 Kip Snacks</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-item"><span>½ kip</span><span>€7.20</span></div>
+                    <div class="menu-item"><span>Kippenbout</span><span>€4.50</span></div>
+                    <div class="menu-item"><span>Lihanboutje</span><span>€3.40</span></div>
+                    <div class="menu-item"><span>Kipnuggets (6 st.)</span><span>€3.60</span></div>
+                    <div class="menu-item"><span>Kipfingers (6 st.)</span><span>€4.00</span></div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item"><span>Kipsaté met saus (3 st.)</span><span>€3.30</span></div>
+                    <div class="menu-item"><span>Vlammetjes (5 st.)</span><span>€4.00</span></div>
+                    <div class="menu-item"><span>Hot wings (4 st.)</span><span>€3.50</span></div>
+                    <div class="menu-item"><span>Vlampijpen</span><span>€4.70</span></div>
+                    <div class="menu-item"><span>Chicken strips (3 st.)</span><span>€2.90</span></div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item"><span>Belcanto extreme</span><span>€4.50</span></div>
+                    <div class="menu-item"><span>Kip/varkenschnitzel los</span><span>€3.50</span></div>
+                    <div class="menu-item"><span>Boerenbrok</span><span>€2.90</span></div>
+                    <div class="menu-item"><span>Loempia</span><span>€4.00</span></div>
+                    <div class="menu-item"><span>Mini-loempia's (2 st.)</span><span>€3.30</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overige Snacks -->
+        <div class="menu-category">
+            <h3 class="category-title">🔥 Overige Snacks</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-item"><span>Vuurvreter</span><span>€3.10</span></div>
+                    <div class="menu-item"><span>Bitterballen (6 st.)</span><span>€3.60</span></div>
+                    <div class="menu-item"><span>Snackbox (8 st.)</span><span>€6.50</span></div>
+                    <div class="menu-item"><span>Mini mexicano (5 st.)</span><span>€3.90</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vega Snacks -->
+        <div class="menu-category">
+            <h3 class="category-title">🥬 Vega Snacks</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-item"><span>Vega bami/nasischijf</span><span>€2.70</span></div>
+                    <div class="menu-item"><span>Groentekroket</span><span>€2.60</span></div>
+                    <div class="menu-item"><span>Vega burger</span><span>€4.80</span></div>
+                    <div class="menu-item"><span>Vega kipcorn</span><span>€2.80</span></div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item"><span>Viat. mini-loempia (2 st.)</span><span>€3.40</span></div>
+                    <div class="menu-item"><span>Chin. mini-loempia (8 st.)</span><span>€3.70</span></div>
+                    <div class="menu-item"><span>Vega frikandel</span><span>€2.80</span></div>
+                    <div class="menu-item"><span>Uienringen (10 st.)</span><span>€3.60</span></div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item"><span>Kaasnacho's (6 st.)</span><span>€4.40</span></div>
+                    <div class="menu-item"><span>Kaastengels (6 st.)</span><span>€4.40</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Halal Snacks -->
+        <div class="menu-category">
+            <h3 class="category-title">🌙 Halal Snacks</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-item"><span>Kippopcorn (10 st.)</span><span>€2.70</span></div>
+                    <div class="menu-item"><span>Frikandel halal</span><span>€3.30</span></div>
+                    <div class="menu-item"><span>Mexicano rund/kip halal</span><span>€2.70</span></div>
+                    <div class="menu-item"><span>Kipcorn halal</span><span>€2.70</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Broodjes -->
+        <div class="menu-category">
+            <h3 class="category-title">🥖 Broodjes</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-item"><span>Br. kroket</span><span>€3.20</span></div>
+                    <div class="menu-item"><span>Br. frikandel</span><span>€3.20</span></div>
+                    <div class="menu-item"><span>Br. gezond</span><span>€4.60</span></div>
+                    <div class="menu-item"><span>Br. gebakken ei</span><span>€2.70</span></div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item"><span>Br. hete kip</span><span>€5.10</span></div>
+                    <div class="menu-item"><span>Br. tartaar</span><span>€3.50</span></div>
+                    <div class="menu-item"><span>Br. warmvlees</span><span>€3.90</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hamburgers -->
+        <div class="menu-category">
+            <h3 class="category-title">🍔 Hamburgers</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-item"><span>Br. hamburger</span><span>€4.30</span></div>
+                    <div class="menu-item"><span>Br. Mexicanoburger</span><span>€5.10</span></div>
+                    <div class="menu-item"><span>Br. super hamburger</span><span>€5.00</span></div>
+                    <div class="menu-item"><span>Br. hamburger Hawaii</span><span>€4.30</span></div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item"><span>Br. heksenburger</span><span>€4.30</span></div>
+                    <div class="menu-item"><span>Br. cheeseburger</span><span>€4.30</span></div>
+                    <div class="menu-item"><span>Br. visburger</span><span>€5.20</span></div>
+                    <div class="menu-item"><span>Br. kipburger</span><span>€4.80</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schotels -->
+        <div class="menu-category">
+            <h3 class="category-title">🍽️ Schotels</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-item"><span>Friet met ½ kip</span><span>€12.50</span></div>
+                    <div class="menu-item"><span>Friet met 3 st. saté</span><span>€12.50</span></div>
+                    <div class="menu-item"><span>Friet met schnitzel</span><span>€11.50</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sauzen -->
+        <div class="menu-category">
+            <h3 class="category-title">🥫 Sauzen</h3>
+            <div class="friet-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Klein</th>
+                            <th>Groot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Beker satésaus</td>
+                            <td>€2.80</td>
+                            <td>€3.80</td>
+                        </tr>
+                        <tr>
+                            <td>Beker stoofvlees</td>
+                            <td>€3.30</td>
+                            <td>€4.90</td>
+                        </tr>
+                        <tr>
+                            <td>Bakje frietsaus</td>
+                            <td>€1.80</td>
+                            <td>€3.60</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact & Openingstijden</h2>
+        <div class="contact-layout">
+            <div class="info-column">
+                <div class="info-card">
+                    <h3>📍 Adres</h3>
+                    <p>Heksenwaag 39<br>4823 JX Breda</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>📞 Telefoon</h3>
+                    <p><a href="tel:0765424470" style="color: #2d1b4e; text-decoration: none; font-weight: bold;">076 542 4470</a></p>
+                </div>
+
+                <div class="info-card">
+                    <h3>🕐 Openingstijden</h3>
+                    <div class="opening-hours">
+                        <div class="day-hours closed">
+                            <span><strong>Maandag</strong></span>
+                            <span>Gesloten</span>
+                        </div>
+                        <div class="day-hours">
+                            <span><strong>Dinsdag</strong></span>
+                            <span>12:00 - 21:00</span>
+                        </div>
+                        <div class="day-hours">
+                            <span><strong>Woensdag</strong></span>
+                            <span>12:00 - 21:00</span>
+                        </div>
+                        <div class="day-hours">
+                            <span><strong>Donderdag</strong></span>
+                            <span>12:00 - 21:00</span>
+                        </div>
+                        <div class="day-hours">
+                            <span><strong>Vrijdag</strong></span>
+                            <span>12:00 - 21:00</span>
+                        </div>
+                        <div class="day-hours">
+                            <span><strong>Zaterdag</strong></span>
+                            <span>12:00 - 21:00</span>
+                        </div>
+                        <div class="day-hours">
+                            <span><strong>Zondag</strong></span>
+                            <span>14:00 - 21:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449.8!2d4.7758!3d51.5896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6a0b7d4e2f1bd%3A0x1234567890abcdef!2sHeksenwaag%2039%2C%204823%20JX%20Breda!5e0!3m2!1snl!2snl!4v1234567890123!5m2!1snl!2snl" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Snackbar De Heksenketel - Breda | Vers uit de ketel!</p>
+    </footer>
+</body>
+</html>
